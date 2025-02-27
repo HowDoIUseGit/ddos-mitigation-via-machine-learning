@@ -1,9 +1,9 @@
 [project]
 name = "ddos-mitigation-via-machine-learning"
 version = "0.1.0"
-description = ""
+description = "A machine learning project for detecting DDoS attacks in network traffic."
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Simon Hajek",email = "sihajek@aol.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.10"

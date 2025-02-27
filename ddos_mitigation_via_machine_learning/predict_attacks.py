@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from data_preprocessing import preprocess_data
 
-def predict_attacks(new_data_path, model_path='ddos_recognition_model_v3.h5'):
+def predict_attacks(new_data_path, model_path='ddos_recognition_model.h5'):
     new_data = pd.read_csv(new_data_path)
 
     X_scaled, _, label_mapping, scaler, valid_indices = preprocess_data(new_data)
@@ -14,9 +14,6 @@ def predict_attacks(new_data_path, model_path='ddos_recognition_model_v3.h5'):
 
     predictions = model.predict(X_scaled)
     predictions_binary = (predictions > 0.5).astype(int)
-
-    print("Label Mapping:", label_mapping)
-    print("Predictions Binary:", predictions_binary)
 
     predictions_labels = [label_mapping[pred] for pred in predictions_binary.flatten()]
 
@@ -31,6 +28,6 @@ if __name__ == "__main__":
 
     results = predict_attacks(args.new_data_path)
 
-    output_file = 'new_data_with_predictions_v3.csv'
+    output_file = 'new_data_with_predictions.csv'
     results.to_csv(output_file, index=False)
     print(f"Results saved to '{output_file}'")
