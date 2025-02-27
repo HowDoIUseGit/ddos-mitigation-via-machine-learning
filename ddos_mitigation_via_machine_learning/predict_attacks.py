@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from data_preprocessing import preprocess_data
 
-def predict_attacks(new_data_path, model_path='ddos_recognition_model.h5'):
+def predict_attacks(new_data_path, model_path):
     new_data = pd.read_csv(new_data_path)
 
     X_scaled, _, label_mapping, scaler, valid_indices = preprocess_data(new_data)
@@ -24,9 +24,10 @@ def predict_attacks(new_data_path, model_path='ddos_recognition_model.h5'):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Predict DDoS attacks")
     parser.add_argument("new_data_path", type=str, help="Path to the CSV file containing the flow data you want to test.")
+    parser.add_argument("model_path", type=str, help="Path to the Model file containing the saved tensorflow model you want to use.")
     args = parser.parse_args()
 
-    results = predict_attacks(args.new_data_path)
+    results = predict_attacks(args.new_data_path, args.model_path)
 
     output_file = 'new_data_with_predictions.csv'
     results.to_csv(output_file, index=False)
